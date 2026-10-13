@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Housing Price Classifier</title>
+<style>
+  body{font-family:system-ui,Segoe UI,Arial,sans-serif;background:#f3f5f9;margin:0;padding:24px;color:#1c2330}
+  .card{max-width:640px;margin:auto;background:#fff;padding:28px;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.08)}
+  h1{margin-top:0;font-size:1.5rem} p.sub{color:#5b6573;margin-top:-6px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  label{font-size:.85rem;font-weight:600;display:block;margin-bottom:4px}
+  input,select{width:100%;padding:9px;border:1px solid #cdd3dd;border-radius:8px;box-sizing:border-box;font-size:.95rem}
+  button{margin-top:18px;width:100%;padding:12px;background:#2f5bea;color:#fff;border:0;border-radius:8px;font-size:1rem;cursor:pointer}
+  button:hover{background:#2449c4}
+  .result{margin-top:22px;padding:16px;border-radius:10px}
+  .High{background:#e6f6ec;border:1px solid #84cf9f}.Low{background:#fdeeee;border:1px solid #e59a9a}
+  .err{margin-top:18px;color:#b3261e}
+  .bar{height:10px;background:#e3e7ee;border-radius:6px;overflow:hidden;margin:4px 0 10px}
+  .bar>div{height:100%;background:#2f5bea}
+  @media(max-width:520px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Housing Price Classifier</h1>
+  <p class="sub">Logistic Regression &middot; test accuracy {{ "%.1f"|format(accuracy*100) }}%</p>
+  <form method="post">
+    <div class="grid">
+      {% for key, label in fields %}
+      <div><label for="{{key}}">{{label}}</label>
+      <input id="{{key}}" name="{{key}}" type="number" step="any" required value="{{ values[key] }}"></div>
+      {% endfor %}
+      <div><label for="ocean_proximity">Ocean proximity</label>
+      <select id="ocean_proximity" name="ocean_proximity">
+        {% for o in options %}<option value="{{o}}" {% if o==values.ocean_proximity %}selected{% endif %}>{{o}}</option>{% endfor %}
+      </select></div>
+    </div>
+    <button type="submit">Predict</button>
+  </form>
+  {% if error %}<div class="err">{{ error }}</div>{% endif %}
+  {% if result %}
+  <div class="result {{ result.label }}">
+    <strong>Predicted: {{ result.label }} price district</strong><br>
+    <small>High = median house value above ${{ "{:,.0f}".format(result.threshold) }}</small>
+    <div style="margin-top:12px">High: {{ "%.1f"|format(result.p_high*100) }}%
+      <div class="bar"><div style="width:{{ result.p_high*100 }}%"></div></div>
+      Low: {{ "%.1f"|format(result.p_low*100) }}%
+      <div class="bar"><div style="width:{{ result.p_low*100 }}%"></div></div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+</body>
+</html>

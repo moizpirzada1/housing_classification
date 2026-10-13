@@ -1,0 +1,113 @@
+{
+  "numeric_features": [
+    "longitude",
+    "latitude",
+    "housing_median_age",
+    "total_rooms",
+    "total_bedrooms",
+    "population",
+    "households",
+    "median_income"
+  ],
+  "categorical_features": [
+    "ocean_proximity"
+  ],
+  "ocean_proximity_options": [
+    "<1H OCEAN",
+    "INLAND",
+    "ISLAND",
+    "NEAR BAY",
+    "NEAR OCEAN"
+  ],
+  "price_threshold": 179700.0,
+  "class_names": {
+    "0": "Low",
+    "1": "High"
+  },
+  "defaults": {
+    "longitude": -118.49,
+    "latitude": 34.26,
+    "housing_median_age": 29.0,
+    "total_rooms": 2127.0,
+    "total_bedrooms": 435.0,
+    "population": 1166.0,
+    "households": 409.0,
+    "median_income": 3.5347999999999997
+  },
+  "ranges": {
+    "longitude": [
+      -124.35,
+      -114.31
+    ],
+    "latitude": [
+      32.54,
+      41.95
+    ],
+    "housing_median_age": [
+      1.0,
+      52.0
+    ],
+    "total_rooms": [
+      2.0,
+      39320.0
+    ],
+    "total_bedrooms": [
+      1.0,
+      6445.0
+    ],
+    "population": [
+      3.0,
+      35682.0
+    ],
+    "households": [
+      1.0,
+      6082.0
+    ],
+    "median_income": [
+      0.4999,
+      15.0001
+    ]
+  },
+  "metrics": {
+    "accuracy": 0.8379360465116279,
+    "classification_report": {
+      "Low": {
+        "precision": 0.842156862745098,
+        "recall": 0.8319612590799031,
+        "f1-score": 0.8370280146163216,
+        "support": 2065.0
+      },
+      "High": {
+        "precision": 0.8338122605363985,
+        "recall": 0.8439166262724188,
+        "f1-score": 0.8388340158997832,
+        "support": 2063.0
+      },
+      "accuracy": 0.8379360465116279,
+      "macro avg": {
+        "precision": 0.8379845616407482,
+        "recall": 0.837938942676161,
+        "f1-score": 0.8379310152580524,
+        "support": 4128.0
+      },
+      "weighted avg": {
+        "precision": 0.8379865831044616,
+        "recall": 0.8379360465116279,
+        "f1-score": 0.8379305777577415,
+        "support": 4128.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        1718,
+        347
+      ],
+      [
+        322,
+        1741
+      ]
+    ],
+    "train_rows": 16512,
+    "test_rows": 4128
+  }
+}
